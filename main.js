@@ -499,7 +499,6 @@ document.addEventListener('DOMContentLoaded', () => {
     `).join('');
 
     // Bio
-    document.getElementById('modalBio').textContent = a.bio;
 
     // Filmo
     const filmoEl = document.getElementById('modalFilmo');
