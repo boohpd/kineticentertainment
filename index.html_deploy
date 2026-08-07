@@ -1288,7 +1288,7 @@ body:has(button:hover) #cursor {
     <a href="#contact" class="mm-link">Contact</a>
   </div>
   <div class="mm-bottom">
-    <p>kinetic.mjkim@gmail.com</p>
+    <p>contact@kineticentertainment.co.kr</p>
     <p>010-2332-5955</p>
   </div>
 </div>
@@ -1737,7 +1737,7 @@ body:has(button:hover) #cursor {
             <div class="cc-icon">✉️</div>
             <div class="cc-detail">
               <p class="cc-label">이메일 문의</p>
-              <a href="mailto:kinetic.mjkim@gmail.com" class="cc-value">kinetic.mjkim@gmail.com</a>
+              <a href="mailto:contact@kineticentertainment.co.kr" class="cc-value">contact@kineticentertainment.co.kr</a>
             </div>
           </div>
           <div class="cc-item">
@@ -1811,7 +1811,7 @@ body:has(button:hover) #cursor {
         <h4>Contact</h4>
         <a href="tel:010-2332-5955">010-2332-5955</a>
         <a href="tel:010-9197-1465">010-9197-1465</a>
-        <a href="mailto:kinetic.mjkim@gmail.com">kinetic.mjkim@gmail.com</a>
+        <a href="mailto:contact@kineticentertainment.co.kr">contact@<br/>kineticentertainment.co.kr</a>
       </div>
     </div>
     <div class="footer-bottom">
