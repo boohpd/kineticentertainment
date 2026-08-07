@@ -575,32 +575,18 @@ body:has(button:hover) #cursor {
 }
 .artist-card:hover .ac-img-bg { transform: scale(1.06); }
 
-/* Artist photo backgrounds */
-.ac-bg-1 {
-  background-image:
-    linear-gradient(160deg, #1a1208 0%, #2d1f0e 40%, #180e05 100%);
-}
-.ac-bg-2 {
-  background-image:
-    linear-gradient(160deg, #0e1520 0%, #1a2535 40%, #0b0e15 100%);
-}
-/* 이현정, 류지연, 이경재, 이건희 카드 배경은 JS로 동적 주입 */
-.ac-bg-3, .ac-bg-4, .ac-bg-6, .ac-bg-7 {
+/* Artist photo backgrounds — JS injects real photos; gradients = fallback */
+.ac-bg-1, .ac-bg-2, .ac-bg-3, .ac-bg-4, .ac-bg-5, .ac-bg-6, .ac-bg-7 {
   background-size: cover;
   background-position: center top;
 }
-.ac-bg-5 {
-  background-image:
-    linear-gradient(160deg, #141010 0%, #201818 40%, #0a0808 100%);
-}
-.ac-bg-6 {
-  background-image:
-    linear-gradient(160deg, #0a0e14 0%, #151d28 40%, #070a0f 100%);
-}
-.ac-bg-7 {
-  background-image:
-    linear-gradient(160deg, #12100a 0%, #1e1a0e 40%, #0c0a06 100%);
-}
+.ac-bg-1 { background-image: linear-gradient(160deg, #1a1208 0%, #2d1f0e 40%, #180e05 100%); }
+.ac-bg-2 { background-image: linear-gradient(160deg, #0e1520 0%, #1a2535 40%, #0b0e15 100%); }
+.ac-bg-3 { background-image: linear-gradient(160deg, #0d1508 0%, #182310 40%, #090e05 100%); }
+.ac-bg-4 { background-image: linear-gradient(160deg, #100a18 0%, #1c1228 40%, #0a0810 100%); }
+.ac-bg-5 { background-image: linear-gradient(160deg, #141010 0%, #201818 40%, #0a0808 100%); }
+.ac-bg-6 { background-image: linear-gradient(160deg, #0a0e14 0%, #151d28 40%, #070a0f 100%); }
+.ac-bg-7 { background-image: linear-gradient(160deg, #12100a 0%, #1e1a0e 40%, #0c0a06 100%); }
 
 /* Subtle silhouette shape */
 .ac-img-bg::after {

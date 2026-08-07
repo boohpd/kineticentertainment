@@ -586,32 +586,18 @@ body:has(button:hover) #cursor {
 }
 .artist-card:hover .ac-img-bg { transform: scale(1.06); }
 
-/* Artist photo backgrounds */
-.ac-bg-1 {
-  background-image:
-    linear-gradient(160deg, #1a1208 0%, #2d1f0e 40%, #180e05 100%);
-}
-.ac-bg-2 {
-  background-image:
-    linear-gradient(160deg, #0e1520 0%, #1a2535 40%, #0b0e15 100%);
-}
-/* 이현정, 류지연, 이경재, 이건희 카드 배경은 JS로 동적 주입 */
-.ac-bg-3, .ac-bg-4, .ac-bg-6, .ac-bg-7 {
+/* Artist photo backgrounds — JS injects real photos; gradients = fallback */
+.ac-bg-1, .ac-bg-2, .ac-bg-3, .ac-bg-4, .ac-bg-5, .ac-bg-6, .ac-bg-7 {
   background-size: cover;
   background-position: center top;
 }
-.ac-bg-5 {
-  background-image:
-    linear-gradient(160deg, #141010 0%, #201818 40%, #0a0808 100%);
-}
-.ac-bg-6 {
-  background-image:
-    linear-gradient(160deg, #0a0e14 0%, #151d28 40%, #070a0f 100%);
-}
-.ac-bg-7 {
-  background-image:
-    linear-gradient(160deg, #12100a 0%, #1e1a0e 40%, #0c0a06 100%);
-}
+.ac-bg-1 { background-image: linear-gradient(160deg, #1a1208 0%, #2d1f0e 40%, #180e05 100%); }
+.ac-bg-2 { background-image: linear-gradient(160deg, #0e1520 0%, #1a2535 40%, #0b0e15 100%); }
+.ac-bg-3 { background-image: linear-gradient(160deg, #0d1508 0%, #182310 40%, #090e05 100%); }
+.ac-bg-4 { background-image: linear-gradient(160deg, #100a18 0%, #1c1228 40%, #0a0810 100%); }
+.ac-bg-5 { background-image: linear-gradient(160deg, #141010 0%, #201818 40%, #0a0808 100%); }
+.ac-bg-6 { background-image: linear-gradient(160deg, #0a0e14 0%, #151d28 40%, #070a0f 100%); }
+.ac-bg-7 { background-image: linear-gradient(160deg, #12100a 0%, #1e1a0e 40%, #0c0a06 100%); }
 
 /* Subtle silhouette shape */
 .ac-img-bg::after {
@@ -1288,7 +1274,6 @@ body:has(button:hover) #cursor {
   </div>
   <div class="mm-bottom">
     <p>kinetic.mjkim@gmail.com</p>
-    <p>010-2332-5955</p>
   </div>
 </div>
 
@@ -1725,14 +1710,6 @@ body:has(button:hover) #cursor {
       <div class="contact-right" data-reveal data-delay="200">
         <div class="contact-cards">
           <div class="cc-item">
-            <div class="cc-icon">📞</div>
-            <div class="cc-detail">
-              <p class="cc-label">전화 문의</p>
-              <a href="tel:010-2332-5955" class="cc-value">010-2332-5955</a>
-              <a href="tel:010-9197-1465" class="cc-value">010-9197-1465</a>
-            </div>
-          </div>
-          <div class="cc-item">
             <div class="cc-icon">✉️</div>
             <div class="cc-detail">
               <p class="cc-label">이메일 문의</p>
@@ -1808,8 +1785,6 @@ body:has(button:hover) #cursor {
       </div>
       <div class="footer-col">
         <h4>Contact</h4>
-        <a href="tel:010-2332-5955">010-2332-5955</a>
-        <a href="tel:010-9197-1465">010-9197-1465</a>
         <a href="mailto:kinetic.mjkim@gmail.com">kinetic.mjkim@gmail.com</a>
       </div>
     </div>
