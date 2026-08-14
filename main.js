@@ -265,3 +265,379 @@ const ARTISTS = {
     ads: [],
   },
 };
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  /* ── Preloader ── */
+  const preloader = document.getElementById('preloader');
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      preloader.classList.add('fade-out');
+    }, 2000);
+  });
+  // fallback
+  setTimeout(() => preloader.classList.add('fade-out'), 3500);
+
+
+  /* ── Custom Cursor ── */
+  const cursor    = document.getElementById('cursor');
+  const cursorDot = document.getElementById('cursor-dot');
+  let mx = 0, my = 0;
+  let cx = 0, cy = 0;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursorDot.style.left = mx + 'px';
+    cursorDot.style.top  = my + 'px';
+  });
+
+  const animateCursor = () => {
+    cx += (mx - cx) * 0.12;
+    cy += (my - cy) * 0.12;
+    cursor.style.left = cx + 'px';
+    cursor.style.top  = cy + 'px';
+    requestAnimationFrame(animateCursor);
+  };
+  animateCursor();
+
+  // Hide on mobile
+  if ('ontouchstart' in window) {
+    cursor.style.display = 'none';
+    cursorDot.style.display = 'none';
+  }
+
+
+  /* ── Nav scroll ── */
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+
+  /* ── Mobile menu ── */
+  const menuBtn   = document.getElementById('menuBtn');
+  const menuClose = document.getElementById('menuClose');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const mmLinks   = document.querySelectorAll('.mm-link');
+
+  menuBtn.addEventListener('click', () => mobileMenu.classList.add('open'));
+  menuClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
+  mmLinks.forEach(link => link.addEventListener('click', () => mobileMenu.classList.remove('open')));
+
+
+  /* ── Scroll Reveal (IntersectionObserver) ── */
+  const revealEls = document.querySelectorAll('[data-reveal]');
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        revealObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+
+  revealEls.forEach(el => revealObs.observe(el));
+
+
+  /* ── Smooth anchor scroll ── */
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const href = a.getAttribute('href');
+      if (href === '#') return;
+      const target = document.querySelector(href);
+      if (!target) return;
+      e.preventDefault();
+      const offset = 80;
+      const top = target.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
+    });
+  });
+
+
+  /* ── Artist card hover tilt ── */
+  document.querySelectorAll('.artist-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const rect = card.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width  - 0.5;
+      const y = (e.clientY - rect.top)  / rect.height - 0.5;
+      card.style.transform = `translateY(-4px) rotateX(${-y * 4}deg) rotateY(${x * 4}deg)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+    });
+  });
+
+
+  /* ── Platform items stagger on scroll ── */
+  const platItems = document.querySelectorAll('.platform-item');
+  const platObs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const i = [...platItems].indexOf(entry.target);
+        setTimeout(() => {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }, i * 60);
+        platObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  platItems.forEach(item => {
+    item.style.opacity = '0';
+    item.style.transform = 'translateY(20px)';
+    item.style.transition = 'opacity .5s ease, transform .5s ease';
+    platObs.observe(item);
+  });
+
+
+  /* ── Contact form ── */
+  window.handleForm = (e) => {
+    e.preventDefault();
+    const btn = e.target.querySelector('.btn-submit');
+    const original = btn.textContent;
+    btn.textContent = '전송되었습니다 ✓';
+    btn.style.background = '#4a7c59';
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.textContent = original;
+      btn.style.background = '';
+      btn.disabled = false;
+      e.target.reset();
+    }, 4000);
+  };
+
+
+  /* ── Hero parallax ── */
+  window.addEventListener('scroll', () => {
+    const sy = window.scrollY;
+    const heroContent = document.querySelector('.hero-content');
+    const heroStats   = document.querySelector('.hero-stats');
+    if (heroContent) heroContent.style.transform = `translateY(${sy * 0.18}px)`;
+    if (heroStats)   heroStats.style.transform   = `translateY(${sy * 0.1}px)`;
+  }, { passive: true });
+
+
+  /* ── Active nav link highlight ── */
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks  = document.querySelectorAll('.nav-link');
+  const activeObs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(l => l.style.color = '');
+        const active = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
+        if (active) active.style.color = 'var(--gold)';
+      }
+    });
+  }, { threshold: 0.4 });
+
+  sections.forEach(s => activeObs.observe(s));
+
+
+  /* ── Number counter animation ── */
+  const statNums = document.querySelectorAll('.stat-num');
+  const counterObs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // just a subtle fade-in pulse
+        entry.target.style.animation = 'none';
+        entry.target.offsetHeight; // reflow
+        entry.target.style.animation = 'statPulse .6s ease both';
+        counterObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 1 });
+
+  statNums.forEach(el => counterObs.observe(el));
+
+  // inject keyframe
+  const ks = document.createElement('style');
+  ks.textContent = `
+    @keyframes statPulse {
+      0%   { transform: scale(.8); opacity: 0; }
+      60%  { transform: scale(1.08); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+  `;
+  document.head.appendChild(ks);
+
+
+  /* ── Artist Modal ── */
+  const modal      = document.getElementById('artistModal');
+  const modalClose = document.getElementById('modalClose');
+  const modalPhoto = document.getElementById('modalPhoto');
+  const modalDots  = document.getElementById('modalDots');
+  const modalPrev  = document.getElementById('modalPrev');
+  const modalNext  = document.getElementById('modalNext');
+
+  let currentPhotos = [];
+  let currentPhotoIdx = 0;
+
+  function renderModalPhotos(photos, bgClass) {
+    currentPhotos = photos.filter(Boolean);
+    currentPhotoIdx = 0;
+
+    // Show photo or fallback bg
+    updatePhoto();
+
+    // Dots
+    modalDots.innerHTML = '';
+    if (currentPhotos.length > 1) {
+      currentPhotos.forEach((_, i) => {
+        const dot = document.createElement('span');
+        dot.className = 'mpn-dot' + (i === 0 ? ' active' : '');
+        dot.addEventListener('click', () => goToPhoto(i));
+        modalDots.appendChild(dot);
+      });
+    }
+
+    // Show/hide nav
+    const showNav = currentPhotos.length > 1;
+    modalPrev.style.display = showNav ? '' : 'none';
+    modalNext.style.display = showNav ? '' : 'none';
+  }
+
+  function updatePhoto() {
+    if (currentPhotos.length > 0) {
+      modalPhoto.style.backgroundImage = `url('${currentPhotos[currentPhotoIdx]}')`;
+      modalPhoto.style.backgroundSize = 'cover';
+      modalPhoto.style.backgroundPosition = 'center top';
+    } else {
+      modalPhoto.style.backgroundImage = '';
+    }
+    // Update dots
+    document.querySelectorAll('.mpn-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === currentPhotoIdx);
+    });
+  }
+
+  function goToPhoto(idx) {
+    currentPhotoIdx = (idx + currentPhotos.length) % currentPhotos.length;
+    updatePhoto();
+  }
+
+  modalPrev.addEventListener('click', () => goToPhoto(currentPhotoIdx - 1));
+  modalNext.addEventListener('click', () => goToPhoto(currentPhotoIdx + 1));
+
+  function openModal(artistKey) {
+    const a = ARTISTS[artistKey];
+    if (!a) return;
+
+    // Number & name
+    document.getElementById('modalNumber').textContent = a.number;
+    document.getElementById('modalNameKo').textContent = a.nameKo;
+    document.getElementById('modalNameEn').textContent = a.nameEn;
+
+    // Specs
+    const specsEl = document.getElementById('modalSpecs');
+    specsEl.innerHTML = a.specs.map(s => `
+      <div class="spec-item">
+        <span class="spec-label">${s.label}</span>
+        <span class="spec-value">${s.value}</span>
+      </div>
+    `).join('');
+
+    // Bio
+
+    // Filmo
+    const filmoEl = document.getElementById('modalFilmo');
+    const filmoSection = document.getElementById('modalFilmoSection');
+    if (a.filmo && a.filmo.length) {
+      filmoEl.innerHTML = a.filmo.map(f => `
+        <div class="filmo-item">
+          <span class="filmo-year">${f.year}</span>
+          <span class="filmo-title">${f.title}</span>
+          <span class="filmo-platform">${f.platform}</span>
+        </div>
+      `).join('');
+      filmoSection.style.display = '';
+    } else {
+      filmoSection.style.display = 'none';
+    }
+
+    // Ads
+    const adEl = document.getElementById('modalAd');
+    const adSection = document.getElementById('modalAdSection');
+    if (a.ads && a.ads.length) {
+      adEl.innerHTML = a.ads.map(f => `
+        <div class="filmo-item">
+          <span class="filmo-year">${f.year}</span>
+          <span class="filmo-title">${f.title}</span>
+          <span class="filmo-platform">${f.platform}</span>
+        </div>
+      `).join('');
+      adSection.style.display = '';
+    } else {
+      adSection.style.display = 'none';
+    }
+
+    // Photos — use ac-bg class from card as fallback
+    const card = document.querySelector(`[data-artist="${artistKey}"] .ac-img-bg`);
+    const bgStyle = card ? window.getComputedStyle(card).backgroundImage : '';
+    if (a.photos.some(Boolean)) {
+      renderModalPhotos(a.photos, a.bgClass);
+    } else {
+      // Use same gradient as card
+      modalPhoto.style.backgroundImage = bgStyle;
+      modalPhoto.style.backgroundSize = 'cover';
+      modalDots.innerHTML = '';
+      modalPrev.style.display = 'none';
+      modalNext.style.display = 'none';
+    }
+
+    // Open
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // Card click → open modal
+  document.querySelectorAll('.artist-card[data-artist]').forEach(card => {
+    card.addEventListener('click', () => {
+      openModal(card.dataset.artist);
+    });
+  });
+
+  // Close
+  modalClose.addEventListener('click', closeModal);
+  modal.addEventListener('click', e => {
+    if (e.target === modal) closeModal();
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeModal();
+    if (modal.classList.contains('open')) {
+      if (e.key === 'ArrowLeft')  goToPhoto(currentPhotoIdx - 1);
+      if (e.key === 'ArrowRight') goToPhoto(currentPhotoIdx + 1);
+    }
+  });
+
+  // CTA button closes modal and scrolls to contact
+  document.getElementById('modalCtaBtn').addEventListener('click', () => {
+    closeModal();
+  });
+
+  // ── Inject card background photos ──
+  const cardBgMap = {
+    'hanchae':      { cls: '.ac-bg-1', key: 'hanchae_1_card' },
+    'gominseung':   { cls: '.ac-bg-2', key: 'gominseung_1_card' },
+    'leehyunjeong': { cls: '.ac-bg-3', key: 'leehyunjeong_card' },
+    'ryujiyeon':    { cls: '.ac-bg-4', key: 'ryujiyeon_card' },
+    'jinhyuk':      { cls: '.ac-bg-5', key: 'jinhyuk_1_card' },
+    'leekyoungjae': { cls: '.ac-bg-6', key: 'leekyoungjae_card' },
+    'leegunhee':    { cls: '.ac-bg-7', key: 'leegunhee_card' },
+    'hanareun':     { cls: '.ac-bg-8', key: 'hanareun_card' },
+  };
+  if (typeof CARD_DATA !== 'undefined') {
+    Object.values(cardBgMap).forEach(({ cls, key }) => {
+      const el = document.querySelector(cls);
+      if (el && CARD_DATA[key]) {
+        el.style.backgroundImage = `url('${CARD_DATA[key]}')`;
+      }
+    });
+  }
+
+});
