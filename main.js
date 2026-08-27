@@ -16,7 +16,7 @@ const ARTISTS = {
     bgClass: 'ac-bg-1',
     specs: [
       { label: '신장', value: '169 cm' },
-      { label: '생년', value: '1978년생' },
+      { label: '생년', value: '1980년생' },
     ],
     filmo: [
       { year: '2025', title: '악의 도시', platform: '영화' },
@@ -86,7 +86,7 @@ const ARTISTS = {
     specs: [
       { label: '신장', value: '163 cm' },
       { label: '생년', value: '1996년생' },
-      { label: '특기', value: '경상도사투리, 수화' },
+      { label: '특기', value: '충청도사투리' },
       { label: '학력', value: '동아방송대학 연기과' },
     ],
     filmo: [
@@ -99,8 +99,8 @@ const ARTISTS = {
   },
   ryujiyeon: {
     number: '04',
-    nameKo: '류지연',
-    nameEn: 'RYU JIYEON',
+    nameKo: '라희',
+    nameEn: 'RA HEE',
     photos: [
       PHOTO_DATA["ryujiyeon_1"],
       PHOTO_DATA["ryujiyeon_2"],
