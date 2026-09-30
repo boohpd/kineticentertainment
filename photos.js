@@ -1,4 +1,4 @@
-const PHOTO_DATA = {
+var PHOTO_DATA = {
   "leehyunjeong_1": "images/leehyunjeong_1.jpg",
   "leehyunjeong_2": "images/leehyunjeong_2.jpg",
   "leehyunjeong_3": "images/leehyunjeong_3.jpg",
@@ -21,7 +21,7 @@ const PHOTO_DATA = {
   "hanareun_3": "images/hanareun_3.jpg",
 };
 
-const CARD_DATA = {
+var CARD_DATA = {
   "leehyunjeong_card": "images/leehyunjeong_card.jpg",
   "ryujiyeon_card": "images/ryujiyeon_card.jpg",
   "leekyoungjae_card": "images/leekyoungjae_card.jpg",
