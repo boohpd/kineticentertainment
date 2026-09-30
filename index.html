@@ -1204,6 +1204,7 @@ body:has(button:hover) #cursor {
   <div class="pre-line"></div>
   <p class="pre-text">KINETIC ENTERTAINMENT</p>
 </div>
+<script>setTimeout(function(){ var p=document.getElementById('preloader'); if(p){p.style.opacity='0';p.style.visibility='hidden';setTimeout(function(){p.style.display='none';},800);} }, 1000);</script>
 
 <!-- ─── CURSOR ─── -->
 <div id="cursor"></div>
@@ -2258,7 +2259,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ── Preloader ── */
   const preloader = document.getElementById('preloader');
-  setTimeout(() => preloader.classList.add('fade-out'), 1500);
+  setTimeout(() => {
+    preloader.classList.add('fade-out');
+    setTimeout(() => { preloader.style.display = 'none'; }, 900);
+  }, 800);
 
 
   /* ── Custom Cursor ── */
