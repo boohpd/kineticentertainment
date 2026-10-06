@@ -8,11 +8,7 @@ const ARTISTS = {
     number: '01',
     nameKo: '한채영 (agent)',
     nameEn: 'HAN CHAE YOUNG (agent)',
-    photos: [
-      PHOTO_DATA["hanchae_1"],
-      PHOTO_DATA["hanchae_2"],
-      PHOTO_DATA["hanchae_3"],
-    ],
+    photos: [],  /* 사진 파일 없음 - 그라디언트 배경 사용 */
     bgClass: 'ac-bg-1',
     specs: [
       { label: '신장', value: '169 cm' },
@@ -46,11 +42,7 @@ const ARTISTS = {
     number: '02',
     nameKo: '고민승',
     nameEn: 'GO MIN SEUNG',
-    photos: [
-      PHOTO_DATA["gominseung_1"],
-      PHOTO_DATA["gominseung_2"],
-      PHOTO_DATA["gominseung_3"],
-    ],
+    photos: [],  /* 사진 파일 없음 - 그라디언트 배경 사용 */
     bgClass: 'ac-bg-2',
     specs: [
       { label: '신장', value: '161 cm' },
@@ -84,7 +76,7 @@ const ARTISTS = {
     ],
     bgClass: 'ac-bg-3',
     specs: [
-      { label: '신장', value: '163 cm' },
+      { label: '신장', value: '167 cm' },
       { label: '생년', value: '1996년생' },
       { label: '특기', value: '충청도사투리' },
       { label: '학력', value: '동아방송대학 연기과' },
@@ -134,11 +126,7 @@ const ARTISTS = {
     number: '05',
     nameKo: '진혁',
     nameEn: 'JIN HYUK',
-    photos: [
-      PHOTO_DATA["jinhyuk_1"],
-      PHOTO_DATA["jinhyuk_2"],
-      PHOTO_DATA["jinhyuk_3"],
-    ],
+    photos: [],  /* 사진 파일 없음 - 그라디언트 배경 사용 */
     bgClass: 'ac-bg-5',
     specs: [
       { label: '신장', value: '183 cm' },
@@ -225,7 +213,6 @@ const ARTISTS = {
       { year: '2018', title: 'Galaxy Note9', platform: 'CF' },
     ],
   },
-
   hanareun: {
     number: '08',
     nameKo: '한아름',
@@ -264,6 +251,48 @@ const ARTISTS = {
     ],
     ads: [],
   },
+  yundongwon: {
+    number: '09',
+    nameKo: '윤동원',
+    nameEn: 'YOON DONG WON',
+    photos: [
+      PHOTO_DATA["yundongwon_1"],
+      PHOTO_DATA["yundongwon_2"],
+      PHOTO_DATA["yundongwon_3"],
+    ],
+    bgClass: 'ac-bg-9',
+    specs: [
+      { label: '신장', value: '179 cm' },
+      { label: '생년', value: '1994년생' },
+      { label: '학력', value: '한국예술종합학교 연기과' },
+    ],
+    filmo: [
+      { year: '2024', title: 'Variety', platform: 'Netflix' },
+      { year: '2024', title: 'Daily Dose of Sunshine', platform: 'Netflix' },
+    ],
+    ads: [],
+  },
+  choinsung: {
+    number: '10',
+    nameKo: '최인선',
+    nameEn: 'CHOI IN SUN',
+    photos: [
+      PHOTO_DATA["choinsung_1"],
+      PHOTO_DATA["choinsung_2"],
+      PHOTO_DATA["choinsung_3"],
+    ],
+    bgClass: 'ac-bg-10',
+    specs: [
+      { label: '신장', value: '164 cm' },
+      { label: '생년', value: '1995년생' },
+      { label: '학력', value: '단국대학교 연기전공' },
+    ],
+    filmo: [
+      { year: '2024', title: 'First Doctor', platform: 'Netflix' },
+      { year: '2024', title: 'Crash Course in Romance', platform: 'Netflix' },
+    ],
+    ads: [],
+  },
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -272,60 +301,56 @@ document.addEventListener('DOMContentLoaded', () => {
   const preloader = document.getElementById('preloader');
   window.addEventListener('load', () => {
     setTimeout(() => {
-      preloader.classList.add('fade-out');
-    }, 2000);
+      if (preloader) preloader.classList.add('fade-out');
+    }, 1200);
   });
-  // fallback
-  setTimeout(() => preloader.classList.add('fade-out'), 3500);
+  // 안전 fallback
+  setTimeout(() => { if (preloader) preloader.classList.add('fade-out'); }, 3000);
 
 
   /* ── Custom Cursor ── */
   const cursor    = document.getElementById('cursor');
   const cursorDot = document.getElementById('cursor-dot');
-  let mx = 0, my = 0;
-  let cx = 0, cy = 0;
+  let mx = 0, my = 0, cx = 0, cy = 0;
 
   document.addEventListener('mousemove', e => {
     mx = e.clientX; my = e.clientY;
-    cursorDot.style.left = mx + 'px';
-    cursorDot.style.top  = my + 'px';
+    if (cursorDot) { cursorDot.style.left = mx + 'px'; cursorDot.style.top = my + 'px'; }
   });
 
   const animateCursor = () => {
     cx += (mx - cx) * 0.12;
     cy += (my - cy) * 0.12;
-    cursor.style.left = cx + 'px';
-    cursor.style.top  = cy + 'px';
+    if (cursor) { cursor.style.left = cx + 'px'; cursor.style.top = cy + 'px'; }
     requestAnimationFrame(animateCursor);
   };
   animateCursor();
 
-  // Hide on mobile
   if ('ontouchstart' in window) {
-    cursor.style.display = 'none';
-    cursorDot.style.display = 'none';
+    if (cursor) cursor.style.display = 'none';
+    if (cursorDot) cursorDot.style.display = 'none';
   }
 
 
   /* ── Nav scroll ── */
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 60);
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 60);
   });
 
 
   /* ── Mobile menu ── */
-  const menuBtn   = document.getElementById('menuBtn');
-  const menuClose = document.getElementById('menuClose');
+  const menuBtn    = document.getElementById('menuBtn');
+  const menuClose  = document.getElementById('menuClose');
   const mobileMenu = document.getElementById('mobileMenu');
-  const mmLinks   = document.querySelectorAll('.mm-link');
+  const mmLinks    = document.querySelectorAll('.mm-link');
 
-  menuBtn.addEventListener('click', () => mobileMenu.classList.add('open'));
-  menuClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
-  mmLinks.forEach(link => link.addEventListener('click', () => mobileMenu.classList.remove('open')));
+  if (menuBtn)   menuBtn.addEventListener('click',  () => mobileMenu && mobileMenu.classList.add('open'));
+  if (menuClose) menuClose.addEventListener('click', () => mobileMenu && mobileMenu.classList.remove('open'));
+  mmLinks.forEach(link => link.addEventListener('click', () => mobileMenu && mobileMenu.classList.remove('open')));
 
 
-  /* ── Scroll Reveal (IntersectionObserver) ── */
+  /* ── Scroll Reveal ── */
   const revealEls = document.querySelectorAll('[data-reveal]');
   const revealObs = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -334,8 +359,7 @@ document.addEventListener('DOMContentLoaded', () => {
         revealObs.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
-
+  }, { threshold: 0.10, rootMargin: '0px 0px -40px 0px' });
   revealEls.forEach(el => revealObs.observe(el));
 
 
@@ -347,8 +371,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const target = document.querySelector(href);
       if (!target) return;
       e.preventDefault();
-      const offset = 80;
-      const top = target.getBoundingClientRect().top + window.scrollY - offset;
+      const top = target.getBoundingClientRect().top + window.scrollY - 80;
       window.scrollTo({ top, behavior: 'smooth' });
     });
   });
@@ -362,13 +385,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const y = (e.clientY - rect.top)  / rect.height - 0.5;
       card.style.transform = `translateY(-4px) rotateX(${-y * 4}deg) rotateY(${x * 4}deg)`;
     });
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = '';
-    });
+    card.addEventListener('mouseleave', () => { card.style.transform = ''; });
   });
 
 
-  /* ── Platform items stagger on scroll ── */
+  /* ── Platform items stagger ── */
   const platItems = document.querySelectorAll('.platform-item');
   const platObs = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -382,7 +403,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }, { threshold: 0.1 });
-
   platItems.forEach(item => {
     item.style.opacity = '0';
     item.style.transform = 'translateY(20px)';
@@ -418,7 +438,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { passive: true });
 
 
-  /* ── Active nav link highlight ── */
+  /* ── Active nav highlight ── */
   const sections = document.querySelectorAll('section[id]');
   const navLinks  = document.querySelectorAll('.nav-link');
   const activeObs = new IntersectionObserver(entries => {
@@ -430,36 +450,25 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }, { threshold: 0.4 });
-
   sections.forEach(s => activeObs.observe(s));
 
 
-  /* ── Number counter animation ── */
+  /* ── Stat pulse ── */
+  const ks = document.createElement('style');
+  ks.textContent = `@keyframes statPulse{0%{transform:scale(.8);opacity:0}60%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}`;
+  document.head.appendChild(ks);
   const statNums = document.querySelectorAll('.stat-num');
   const counterObs = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        // just a subtle fade-in pulse
         entry.target.style.animation = 'none';
-        entry.target.offsetHeight; // reflow
+        entry.target.offsetHeight;
         entry.target.style.animation = 'statPulse .6s ease both';
         counterObs.unobserve(entry.target);
       }
     });
   }, { threshold: 1 });
-
   statNums.forEach(el => counterObs.observe(el));
-
-  // inject keyframe
-  const ks = document.createElement('style');
-  ks.textContent = `
-    @keyframes statPulse {
-      0%   { transform: scale(.8); opacity: 0; }
-      60%  { transform: scale(1.08); }
-      100% { transform: scale(1); opacity: 1; }
-    }
-  `;
-  document.head.appendChild(ks);
 
 
   /* ── Artist Modal ── */
@@ -473,16 +482,13 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentPhotos = [];
   let currentPhotoIdx = 0;
 
-  function renderModalPhotos(photos, bgClass) {
-    currentPhotos = photos.filter(Boolean);
+  function renderModalPhotos(photos) {
+    currentPhotos = (photos || []).filter(Boolean);
     currentPhotoIdx = 0;
-
-    // Show photo or fallback bg
     updatePhoto();
 
-    // Dots
-    modalDots.innerHTML = '';
-    if (currentPhotos.length > 1) {
+    if (modalDots) modalDots.innerHTML = '';
+    if (currentPhotos.length > 1 && modalDots) {
       currentPhotos.forEach((_, i) => {
         const dot = document.createElement('span');
         dot.className = 'mpn-dot' + (i === 0 ? ' active' : '');
@@ -491,13 +497,13 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-    // Show/hide nav
     const showNav = currentPhotos.length > 1;
-    modalPrev.style.display = showNav ? '' : 'none';
-    modalNext.style.display = showNav ? '' : 'none';
+    if (modalPrev) modalPrev.style.display = showNav ? '' : 'none';
+    if (modalNext) modalNext.style.display = showNav ? '' : 'none';
   }
 
   function updatePhoto() {
+    if (!modalPhoto) return;
     if (currentPhotos.length > 0) {
       modalPhoto.style.backgroundImage = `url('${currentPhotos[currentPhotoIdx]}')`;
       modalPhoto.style.backgroundSize = 'cover';
@@ -505,7 +511,6 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       modalPhoto.style.backgroundImage = '';
     }
-    // Update dots
     document.querySelectorAll('.mpn-dot').forEach((d, i) => {
       d.classList.toggle('active', i === currentPhotoIdx);
     });
@@ -516,128 +521,124 @@ document.addEventListener('DOMContentLoaded', () => {
     updatePhoto();
   }
 
-  modalPrev.addEventListener('click', () => goToPhoto(currentPhotoIdx - 1));
-  modalNext.addEventListener('click', () => goToPhoto(currentPhotoIdx + 1));
+  if (modalPrev) modalPrev.addEventListener('click', () => goToPhoto(currentPhotoIdx - 1));
+  if (modalNext) modalNext.addEventListener('click', () => goToPhoto(currentPhotoIdx + 1));
 
   function openModal(artistKey) {
     const a = ARTISTS[artistKey];
-    if (!a) return;
+    if (!a || !modal) return;
 
-    // Number & name
-    document.getElementById('modalNumber').textContent = a.number;
-    document.getElementById('modalNameKo').textContent = a.nameKo;
-    document.getElementById('modalNameEn').textContent = a.nameEn;
+    const numEl = document.getElementById('modalNumber');
+    const koEl  = document.getElementById('modalNameKo');
+    const enEl  = document.getElementById('modalNameEn');
+    if (numEl) numEl.textContent = a.number;
+    if (koEl)  koEl.textContent  = a.nameKo;
+    if (enEl)  enEl.textContent  = a.nameEn;
 
-    // Specs
     const specsEl = document.getElementById('modalSpecs');
-    specsEl.innerHTML = a.specs.map(s => `
-      <div class="spec-item">
-        <span class="spec-label">${s.label}</span>
-        <span class="spec-value">${s.value}</span>
-      </div>
-    `).join('');
+    if (specsEl) {
+      specsEl.innerHTML = (a.specs || []).map(s =>
+        `<div class="spec-item"><span class="spec-label">${s.label}</span><span class="spec-value">${s.value}</span></div>`
+      ).join('');
+    }
 
-    // Bio
-
-    // Filmo
-    const filmoEl = document.getElementById('modalFilmo');
+    const filmoEl      = document.getElementById('modalFilmo');
     const filmoSection = document.getElementById('modalFilmoSection');
-    if (a.filmo && a.filmo.length) {
-      filmoEl.innerHTML = a.filmo.map(f => `
-        <div class="filmo-item">
-          <span class="filmo-year">${f.year}</span>
-          <span class="filmo-title">${f.title}</span>
-          <span class="filmo-platform">${f.platform}</span>
-        </div>
-      `).join('');
-      filmoSection.style.display = '';
-    } else {
-      filmoSection.style.display = 'none';
+    if (filmoEl && filmoSection) {
+      if (a.filmo && a.filmo.length) {
+        filmoEl.innerHTML = a.filmo.map(f =>
+          `<div class="filmo-item"><span class="filmo-year">${f.year}</span><span class="filmo-title">${f.title}</span><span class="filmo-platform">${f.platform}</span></div>`
+        ).join('');
+        filmoSection.style.display = '';
+      } else {
+        filmoSection.style.display = 'none';
+      }
     }
 
-    // Ads
-    const adEl = document.getElementById('modalAd');
+    const adEl      = document.getElementById('modalAd');
     const adSection = document.getElementById('modalAdSection');
-    if (a.ads && a.ads.length) {
-      adEl.innerHTML = a.ads.map(f => `
-        <div class="filmo-item">
-          <span class="filmo-year">${f.year}</span>
-          <span class="filmo-title">${f.title}</span>
-          <span class="filmo-platform">${f.platform}</span>
-        </div>
-      `).join('');
-      adSection.style.display = '';
-    } else {
-      adSection.style.display = 'none';
+    if (adEl && adSection) {
+      if (a.ads && a.ads.length) {
+        adEl.innerHTML = a.ads.map(f =>
+          `<div class="filmo-item"><span class="filmo-year">${f.year}</span><span class="filmo-title">${f.title}</span><span class="filmo-platform">${f.platform}</span></div>`
+        ).join('');
+        adSection.style.display = '';
+      } else {
+        adSection.style.display = 'none';
+      }
     }
 
-    // Photos — use ac-bg class from card as fallback
-    const card = document.querySelector(`[data-artist="${artistKey}"] .ac-img-bg`);
-    const bgStyle = card ? window.getComputedStyle(card).backgroundImage : '';
-    if (a.photos.some(Boolean)) {
-      renderModalPhotos(a.photos, a.bgClass);
+    // 사진 처리
+    if (a.photos && a.photos.some(Boolean)) {
+      renderModalPhotos(a.photos);
     } else {
-      // Use same gradient as card
-      modalPhoto.style.backgroundImage = bgStyle;
-      modalPhoto.style.backgroundSize = 'cover';
-      modalDots.innerHTML = '';
-      modalPrev.style.display = 'none';
-      modalNext.style.display = 'none';
+      // 사진 없으면 카드 배경 이미지 사용
+      const card = document.querySelector(`[data-artist="${artistKey}"] .ac-img-bg`);
+      if (card && modalPhoto) {
+        modalPhoto.style.backgroundImage = window.getComputedStyle(card).backgroundImage;
+        modalPhoto.style.backgroundSize = 'cover';
+        modalPhoto.style.backgroundPosition = 'center top';
+      } else if (modalPhoto) {
+        modalPhoto.style.backgroundImage = '';
+      }
+      if (modalDots) modalDots.innerHTML = '';
+      if (modalPrev) modalPrev.style.display = 'none';
+      if (modalNext) modalNext.style.display = 'none';
     }
 
-    // Open
     modal.classList.add('open');
     document.body.style.overflow = 'hidden';
   }
 
   function closeModal() {
-    modal.classList.remove('open');
+    if (modal) modal.classList.remove('open');
     document.body.style.overflow = '';
   }
 
-  // Card click → open modal
+  // 카드 클릭 → 모달
   document.querySelectorAll('.artist-card[data-artist]').forEach(card => {
-    card.addEventListener('click', () => {
-      openModal(card.dataset.artist);
-    });
+    card.addEventListener('click', () => openModal(card.dataset.artist));
   });
 
-  // Close
-  modalClose.addEventListener('click', closeModal);
-  modal.addEventListener('click', e => {
-    if (e.target === modal) closeModal();
-  });
+  if (modalClose) modalClose.addEventListener('click', closeModal);
+  if (modal) modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') closeModal();
-    if (modal.classList.contains('open')) {
+    if (modal && modal.classList.contains('open')) {
       if (e.key === 'ArrowLeft')  goToPhoto(currentPhotoIdx - 1);
       if (e.key === 'ArrowRight') goToPhoto(currentPhotoIdx + 1);
     }
   });
 
-  // CTA button closes modal and scrolls to contact
-  document.getElementById('modalCtaBtn').addEventListener('click', () => {
-    closeModal();
-  });
+  const ctaBtn = document.getElementById('modalCtaBtn');
+  if (ctaBtn) ctaBtn.addEventListener('click', closeModal);
 
-  // ── Inject card background photos ──
+
+  /* ── 카드 배경 이미지 주입 ── */
   const cardBgMap = {
-    'hanchae':      { cls: '.ac-bg-1', key: 'hanchae_1_card' },
-    'gominseung':   { cls: '.ac-bg-2', key: 'gominseung_1_card' },
-    'leehyunjeong': { cls: '.ac-bg-3', key: 'leehyunjeong_card' },
-    'ryujiyeon':    { cls: '.ac-bg-4', key: 'ryujiyeon_card' },
-    'jinhyuk':      { cls: '.ac-bg-5', key: 'jinhyuk_1_card' },
-    'leekyoungjae': { cls: '.ac-bg-6', key: 'leekyoungjae_card' },
-    'leegunhee':    { cls: '.ac-bg-7', key: 'leegunhee_card' },
-    'hanareun':     { cls: '.ac-bg-8', key: 'hanareun_card' },
+    'hanchae':      { cls: '.ac-bg-1',  photoKey: null },
+    'gominseung':   { cls: '.ac-bg-2',  photoKey: null },
+    'leehyunjeong': { cls: '.ac-bg-3',  photoKey: 'leehyunjeong_card' },
+    'ryujiyeon':    { cls: '.ac-bg-4',  photoKey: 'ryujiyeon_card' },
+    'jinhyuk':      { cls: '.ac-bg-5',  photoKey: null },
+    'leekyoungjae': { cls: '.ac-bg-6',  photoKey: 'leekyoungjae_card' },
+    'leegunhee':    { cls: '.ac-bg-7',  photoKey: 'leegunhee_card' },
+    'hanareun':     { cls: '.ac-bg-8',  photoKey: 'hanareun_card' },
+    'yundongwon':   { cls: '.ac-bg-9',  photoKey: 'yundongwon_1' },
+    'choinsung':    { cls: '.ac-bg-10', photoKey: 'choinsung_1' },
   };
-  if (typeof CARD_DATA !== 'undefined') {
-    Object.values(cardBgMap).forEach(({ cls, key }) => {
-      const el = document.querySelector(cls);
-      if (el && CARD_DATA[key]) {
-        el.style.backgroundImage = `url('${CARD_DATA[key]}')`;
-      }
-    });
-  }
+
+  Object.entries(cardBgMap).forEach(([key, { cls, photoKey }]) => {
+    const el = document.querySelector(cls);
+    if (!el) return;
+    const src = photoKey && PHOTO_DATA[photoKey] ? PHOTO_DATA[photoKey]
+              : (CARD_DATA && CARD_DATA[photoKey]) ? CARD_DATA[photoKey]
+              : null;
+    if (src) {
+      el.style.backgroundImage = `url('${src}')`;
+      el.style.backgroundSize = 'cover';
+      el.style.backgroundPosition = 'center top';
+    }
+  });
 
 });
