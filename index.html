@@ -598,7 +598,7 @@ body:has(button:hover) #cursor {
 .artist-card:hover .ac-img-bg { transform: scale(1.06); }
 
 /* Artist photo backgrounds — JS injects real photos; gradients = fallback */
-.ac-bg-1, .ac-bg-2, .ac-bg-3, .ac-bg-4, .ac-bg-5, .ac-bg-6, .ac-bg-7 {
+.ac-bg-1, .ac-bg-2, .ac-bg-3, .ac-bg-4, .ac-bg-5, .ac-bg-6, .ac-bg-7, .ac-bg-8, .ac-bg-9, .ac-bg-10 {
   background-size: cover;
   background-position: center top;
 }
@@ -608,7 +608,10 @@ body:has(button:hover) #cursor {
 .ac-bg-4 { background-image: linear-gradient(160deg, #100a18 0%, #1c1228 40%, #0a0810 100%); }
 .ac-bg-5 { background-image: linear-gradient(160deg, #141010 0%, #201818 40%, #0a0808 100%); }
 .ac-bg-6 { background-image: linear-gradient(160deg, #0a0e14 0%, #151d28 40%, #070a0f 100%); }
-.ac-bg-7 { background-image: linear-gradient(160deg, #12100a 0%, #1e1a0e 40%, #0c0a06 100%); }
+.ac-bg-7  { background-image: linear-gradient(160deg, #12100a 0%, #1e1a0e 40%, #0c0a06 100%); }
+.ac-bg-8  { background-image: linear-gradient(160deg, #0a1018 0%, #101820 40%, #060c12 100%); }
+.ac-bg-9  { background-image: linear-gradient(160deg, #0e1408 0%, #1a2210 40%, #090f05 100%); }
+.ac-bg-10 { background-image: linear-gradient(160deg, #100e14 0%, #1c1a24 40%, #0a080f 100%); }
 
 /* Subtle silhouette shape */
 .ac-img-bg::after {
@@ -1678,7 +1681,7 @@ body:has(button:hover) #cursor {
     <!-- 윤동원 -->
     <div class="artist-card" data-reveal data-delay="200" data-artist="yundongwon">
       <div class="ac-image">
-        <div class="ac-img-bg" style=""></div>
+        <div class="ac-img-bg ac-bg-9"></div>
         <div class="ac-overlay">
           <div class="ac-platforms">
             <span>KBS</span><span>MBC</span><span>tvN</span>
@@ -1705,7 +1708,7 @@ body:has(button:hover) #cursor {
     <!-- 최인선 -->
     <div class="artist-card" data-reveal data-delay="300" data-artist="choinsung">
       <div class="ac-image">
-        <div class="ac-img-bg" style=""></div>
+        <div class="ac-img-bg ac-bg-10"></div>
         <div class="ac-overlay">
           <div class="ac-platforms">
             <span>tvN</span><span>JTBC</span><span>Netflix</span>

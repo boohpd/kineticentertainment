@@ -8,7 +8,11 @@ const ARTISTS = {
     number: '01',
     nameKo: '한채영 (agent)',
     nameEn: 'HAN CHAE YOUNG (agent)',
-    photos: [],  /* 사진 파일 없음 - 그라디언트 배경 사용 */
+    photos: [
+      PHOTO_DATA["hanchae_1"],
+      PHOTO_DATA["hanchae_2"],
+      PHOTO_DATA["hanchae_3"],
+    ],
     bgClass: 'ac-bg-1',
     specs: [
       { label: '신장', value: '169 cm' },
@@ -42,7 +46,11 @@ const ARTISTS = {
     number: '02',
     nameKo: '고민승',
     nameEn: 'GO MIN SEUNG',
-    photos: [],  /* 사진 파일 없음 - 그라디언트 배경 사용 */
+    photos: [
+      PHOTO_DATA["gominseung_1"],
+      PHOTO_DATA["gominseung_2"],
+      PHOTO_DATA["gominseung_3"],
+    ],
     bgClass: 'ac-bg-2',
     specs: [
       { label: '신장', value: '161 cm' },
@@ -126,7 +134,9 @@ const ARTISTS = {
     number: '05',
     nameKo: '진혁',
     nameEn: 'JIN HYUK',
-    photos: [],  /* 사진 파일 없음 - 그라디언트 배경 사용 */
+    photos: [
+      PHOTO_DATA["jinhyuk_1"],
+    ],
     bgClass: 'ac-bg-5',
     specs: [
       { label: '신장', value: '183 cm' },
@@ -616,16 +626,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ── 카드 배경 이미지 주입 ── */
   const cardBgMap = {
-    'hanchae':      { cls: '.ac-bg-1',  photoKey: null },
-    'gominseung':   { cls: '.ac-bg-2',  photoKey: null },
+    'hanchae':      { cls: '.ac-bg-1',  photoKey: 'hanchae_card' },
+    'gominseung':   { cls: '.ac-bg-2',  photoKey: 'gominseung_card' },
     'leehyunjeong': { cls: '.ac-bg-3',  photoKey: 'leehyunjeong_card' },
     'ryujiyeon':    { cls: '.ac-bg-4',  photoKey: 'ryujiyeon_card' },
-    'jinhyuk':      { cls: '.ac-bg-5',  photoKey: null },
+    'jinhyuk':      { cls: '.ac-bg-5',  photoKey: 'jinhyuk_card' },
     'leekyoungjae': { cls: '.ac-bg-6',  photoKey: 'leekyoungjae_card' },
     'leegunhee':    { cls: '.ac-bg-7',  photoKey: 'leegunhee_card' },
     'hanareun':     { cls: '.ac-bg-8',  photoKey: 'hanareun_card' },
-    'yundongwon':   { cls: '.ac-bg-9',  photoKey: 'yundongwon_1' },
-    'choinsung':    { cls: '.ac-bg-10', photoKey: 'choinsung_1' },
+    'yundongwon':   { cls: '.ac-bg-9',  photoKey: 'yundongwon_card' },
+    'choinsung':    { cls: '.ac-bg-10', photoKey: 'choinsung_card' },
   };
 
   Object.entries(cardBgMap).forEach(([key, { cls, photoKey }]) => {
