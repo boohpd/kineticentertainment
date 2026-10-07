@@ -64,6 +64,8 @@ var PHOTO_DATA = {
 
   /* 진혁 */
   "jinhyuk_1": "images/jinhyuk_1.jpg",
+  "jinhyuk_2": "images/jinhyuk_2.jpg",
+  "jinhyuk_3": "images/jinhyuk_3.jpg",
   "jinhyuk_card": "images/jinhyuk_1.jpg",
 };
 

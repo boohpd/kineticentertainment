@@ -136,6 +136,8 @@ const ARTISTS = {
     nameEn: 'JIN HYUK',
     photos: [
       PHOTO_DATA["jinhyuk_1"],
+      PHOTO_DATA["jinhyuk_2"],
+      PHOTO_DATA["jinhyuk_3"],
     ],
     bgClass: 'ac-bg-5',
     specs: [
